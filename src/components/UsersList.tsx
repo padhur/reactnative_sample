@@ -2,11 +2,13 @@ import React, {useEffect, useState} from 'react';
 import {FlatList, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import NetworkService from '../service/NetworkService';
 import {User, UsersResult} from '../data/UserResult';
+import Loading from './Loading';
 import {useNavigation} from '@react-navigation/native';
 import track from '../utils/track';
 
 const UsersList: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -15,8 +17,10 @@ const UsersList: React.FC = () => {
   }, []);
 
   const fetchUsers = async () => {
+    setIsLoading(true);
     try {
       const response = await NetworkService.get<UsersResult>('users');
+      setIsLoading(false);
       setUsers(response.users);
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -39,7 +43,8 @@ const UsersList: React.FC = () => {
     );
   };
 
-  return (
+  return (isLoading ?
+   <Loading/>:
     <FlatList
       data={users}
       renderItem={renderUserItem}
