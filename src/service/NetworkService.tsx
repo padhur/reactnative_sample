@@ -1,3 +1,5 @@
+import {NETWORK_BASE_URL} from '../constants';
+
 export interface RequestOptions {
   method: 'GET' | 'POST' | 'PUT' | 'DELETE';
   headers?: {[key: string]: string};
@@ -65,27 +67,4 @@ class NetworkService {
   }
 }
 
-export default NetworkService;
-
-// Example usage:
-// const networkService = new NetworkService('https://api.example.com');
-
-// (async () => {
-//   try {
-//     const response = await networkService.get<{data: any}>('data');
-//     console.log('GET response:', response);
-
-//     const postData = {key: 'value'};
-//     const postResponse = await networkService.post('data', postData);
-//     console.log('POST response:', postResponse);
-
-//     const putData = {id: 123, updatedKey: 'updatedValue'};
-//     const putResponse = await networkService.put('data/123', putData);
-//     console.log('PUT response:', putResponse);
-
-//     const deleteResponse = await networkService.delete('data/123');
-//     console.log('DELETE response:', deleteResponse);
-//   } catch (error) {
-//     console.error('Error:', error);
-//   }
-// })();
+export default new NetworkService(NETWORK_BASE_URL);

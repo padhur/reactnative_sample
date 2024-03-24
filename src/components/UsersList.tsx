@@ -3,6 +3,7 @@ import {FlatList, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import NetworkService from '../service/NetworkService';
 import {User, UsersResult} from '../data/UserResult';
 import {useNavigation} from '@react-navigation/native';
+import track from '../utils/track';
 
 const UsersList: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -15,8 +16,7 @@ const UsersList: React.FC = () => {
 
   const fetchUsers = async () => {
     try {
-      const networkService = new NetworkService('https://dummyjson.com');
-      const response = await networkService.get<UsersResult>('users');
+      const response = await NetworkService.get<UsersResult>('users');
       setUsers(response.users);
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -24,6 +24,7 @@ const UsersList: React.FC = () => {
   };
 
   const navigateToUserDetail = (user: User) => {
+    track('userListOnTap', user);
     // @ts-ignore
     navigation.navigate('Detail', {user});
   };

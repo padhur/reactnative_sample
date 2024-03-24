@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import Home from '../components/Home'; // import your screen components
-import Accounts from '../components/Accounts';
-import Services from '../components/Services';
-import Reports from '../components/Reports';
+import Home from '../screens/Home'; // import your screen components
+import Accounts from '../screens/Accounts';
+import Services from '../screens/Services';
+import Reports from '../screens/Reports';
 import SplashScreen from '../screens/SplashScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -35,7 +35,11 @@ const BottomTabNavigator = () => {
           options={{
             tabBarLabel: 'Services',
             tabBarIcon: ({color, size}) => (
-              <MaterialIcons name="miscellaneous-services" size={size} color={color} />
+              <MaterialIcons
+                name="miscellaneous-services"
+                size={size}
+                color={color}
+              />
             ),
           }}
         />
