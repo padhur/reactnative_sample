@@ -6,7 +6,7 @@ import {AnalyticsTracker} from './src/service/AnalyticsTracker';
 const App: React.FC = () => {
   useEffect(() => {
     // On Start of application, run only once
-    AnalyticsTracker.initialise(); //Init the analytics
+    AppLaunchModule.initialise(); //Init the analytics
   }, []);
 
   return (
